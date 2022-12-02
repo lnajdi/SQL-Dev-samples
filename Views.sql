@@ -73,3 +73,14 @@ desc employees;
 select * from user_tables 
 where table_name = 'EMPLOYEES';
 
+
+
+create view view_city_salary_report
+as
+select city, max(salary) max_sal ,
+        min(salary) min_sal , 
+        sum(salary) sum_sal
+from employees emp  
+left JOIN departments dep on emp.department_id = dep.department_id
+left join locations loc on dep.location_id = loc.location_id
+ group by city;
