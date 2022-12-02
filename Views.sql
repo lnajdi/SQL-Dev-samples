@@ -1,4 +1,5 @@
-
+--creat view_emp_sal_max view--- 
+================================
 create or replace VIEW view_emp_sal_max
   as   
 SELECT e.last_name, e.salary, e.department_id, d.maxsal
@@ -8,7 +9,7 @@ FROM employees e,
         GROUP BY department_id) d
 WHERE e.department_id= d.department_id
 AND e.salary= d.maxsal;
-
+================================
 
 select * from view_emp_sal_max ;
 
