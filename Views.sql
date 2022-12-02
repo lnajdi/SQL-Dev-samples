@@ -84,3 +84,24 @@ from employees emp
 left JOIN departments dep on emp.department_id = dep.department_id
 left join locations loc on dep.location_id = loc.location_id
  group by city;
+
+
+--Solution one 
+SELECT e.last_name,e.department_id,
+        e.salary ,dep.avgSalDep,job.avgSalJob
+FROM employees e,
+            (SELECT department_id, round(avg(salary),2)  avgSalDep
+        FROM employees
+        GROUP BY department_id) dep ,
+        (SELECT job_id, round(avg(salary),2)  avgSalJob
+        FROM employees
+        GROUP BY job_id) job
+WHERE e.department_id= dep.department_id
+and e.job_id= job.job_id;
+
+
+--Solution one usin analytical functions
+SELECT last_name,first_name, salary,
+    avg(salary) over(partition by department_id) as avgsal_dep ,
+    avg(salary) over(partition by job_id) as avgsal_job    
+FROM employees 
