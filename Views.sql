@@ -100,7 +100,7 @@ WHERE e.department_id= dep.department_id
 and e.job_id= job.job_id;
 
 
---Solution one usin analytical functions
+--Second Solution  usign analytical functions
 SELECT last_name,first_name, salary,
     avg(salary) over(partition by department_id) as avgsal_dep ,
     avg(salary) over(partition by job_id) as avgsal_job    
